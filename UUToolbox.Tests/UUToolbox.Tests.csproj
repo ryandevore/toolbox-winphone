@@ -53,6 +53,7 @@
     <Compile Include="ByteArrayExtensionTests.cs" />
     <Compile Include="NumberExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringExtensionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UUToolbox\UUToolbox.csproj">
