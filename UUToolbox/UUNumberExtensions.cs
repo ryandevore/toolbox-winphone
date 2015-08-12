@@ -110,7 +110,7 @@ namespace UUToolbox
                 }
             }
 
-            return BitConverter.ToUInt16(buffer, 0);
+            return BitConverter.ToUInt16(buffer, 0).UUSwapByteOrder();
         }
 
         #endregion 

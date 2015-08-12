@@ -221,35 +221,31 @@ namespace UUToolbox.Tests
         {
             var testData = new List<Tuple<ushort, ushort>>()
             {
-                new Tuple<ushort, ushort>(0x0100, 1),
-                new Tuple<ushort, ushort>(0x0200, 2),
-                new Tuple<ushort, ushort>(0x0300, 3),
-                new Tuple<ushort, ushort>(0x0400, 4),
-                new Tuple<ushort, ushort>(0x0500, 5),
-                new Tuple<ushort, ushort>(0x0600, 6),
-                new Tuple<ushort, ushort>(0x0700, 7),
-                new Tuple<ushort, ushort>(0x0900, 9),
-                new Tuple<ushort, ushort>(0x0800, 8),
-                new Tuple<ushort, ushort>(0x1000, 10),
-                new Tuple<ushort, ushort>(0x9900, 99),
+                new Tuple<ushort, ushort>(0x0100, 100),
+                new Tuple<ushort, ushort>(0x0200, 200),
+                new Tuple<ushort, ushort>(0x0300, 300),
+                new Tuple<ushort, ushort>(0x0400, 400),
+                new Tuple<ushort, ushort>(0x0500, 500),
+                new Tuple<ushort, ushort>(0x0600, 600),
+                new Tuple<ushort, ushort>(0x0700, 700),
+                new Tuple<ushort, ushort>(0x0900, 900),
+                new Tuple<ushort, ushort>(0x0800, 800),
+                new Tuple<ushort, ushort>(0x1000, 1000),
+                new Tuple<ushort, ushort>(0x9900, 9900),
 
-                new Tuple<ushort, ushort>(0x0001, 100),
-                new Tuple<ushort, ushort>(0x0002, 200),
-                new Tuple<ushort, ushort>(0x0003, 300),
-                new Tuple<ushort, ushort>(0x0004, 400),
-                new Tuple<ushort, ushort>(0x0005, 500),
-                new Tuple<ushort, ushort>(0x0006, 600),
-                new Tuple<ushort, ushort>(0x0007, 700),
-                new Tuple<ushort, ushort>(0x0009, 900),
-                new Tuple<ushort, ushort>(0x0008, 800),
-                new Tuple<ushort, ushort>(0x0010, 1000),
-                new Tuple<ushort, ushort>(0x0099, 9900),
-
-                //new Tuple<ushort, ushort>(0x100, 100),
-                //new Tuple<ushort, ushort>(0x120, 120),
-                //new Tuple<ushort, ushort>(0x165, 165),
-                //new Tuple<ushort, ushort>(0x0800, 8),
-                new Tuple<ushort, ushort>(0x9000, 90),
+                new Tuple<ushort, ushort>(0x0001, 1),
+                new Tuple<ushort, ushort>(0x0002, 2),
+                new Tuple<ushort, ushort>(0x0003, 3),
+                new Tuple<ushort, ushort>(0x0004, 4),
+                new Tuple<ushort, ushort>(0x0005, 5),
+                new Tuple<ushort, ushort>(0x0006, 6),
+                new Tuple<ushort, ushort>(0x0007, 7),
+                new Tuple<ushort, ushort>(0x0009, 9),
+                new Tuple<ushort, ushort>(0x0008, 8),
+                new Tuple<ushort, ushort>(0x0010, 10),
+                new Tuple<ushort, ushort>(0x0099, 99),
+                
+                new Tuple<ushort, ushort>(0x9000, 9000),
                 new Tuple<ushort, ushort>(0x9999, 9999),
                 
                 // Anything over 9999 returns zero
@@ -261,6 +257,50 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item1, td.Item2.UUFromBcd(), "Expect FromBcd convert to work");
+            }
+        }
+
+        [TestMethod]
+        public void TestFromBcdToFrom()
+        {
+            var testData = new List<Tuple<ushort, ushort>>()
+            {
+                new Tuple<ushort, ushort>(0x0100, 100),
+                new Tuple<ushort, ushort>(0x0200, 200),
+                new Tuple<ushort, ushort>(0x0300, 300),
+                new Tuple<ushort, ushort>(0x0400, 400),
+                new Tuple<ushort, ushort>(0x0500, 500),
+                new Tuple<ushort, ushort>(0x0600, 600),
+                new Tuple<ushort, ushort>(0x0700, 700),
+                new Tuple<ushort, ushort>(0x0900, 900),
+                new Tuple<ushort, ushort>(0x0800, 800),
+                new Tuple<ushort, ushort>(0x1000, 1000),
+                new Tuple<ushort, ushort>(0x9900, 9900),
+
+                new Tuple<ushort, ushort>(0x0001, 1),
+                new Tuple<ushort, ushort>(0x0002, 2),
+                new Tuple<ushort, ushort>(0x0003, 3),
+                new Tuple<ushort, ushort>(0x0004, 4),
+                new Tuple<ushort, ushort>(0x0005, 5),
+                new Tuple<ushort, ushort>(0x0006, 6),
+                new Tuple<ushort, ushort>(0x0007, 7),
+                new Tuple<ushort, ushort>(0x0009, 9),
+                new Tuple<ushort, ushort>(0x0008, 8),
+                new Tuple<ushort, ushort>(0x0010, 10),
+                new Tuple<ushort, ushort>(0x0099, 99),
+
+                new Tuple<ushort, ushort>(0x9000, 9000),
+                new Tuple<ushort, ushort>(0x9999, 9999),
+
+            };
+
+            foreach (var td in testData)
+            {
+                var toBcd = td.Item1.UUToBcd();
+                Assert.AreEqual(td.Item2, toBcd);
+
+                var fromBcd = toBcd.UUFromBcd();
+                Assert.AreEqual(td.Item1, fromBcd, "Expect to/from BCD to work");
             }
         }
 
