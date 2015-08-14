@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace UUToolbox.Tests
 {
@@ -229,6 +230,23 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, td.Item1.UUGetInt64(td.Item2), "Expect Get_{0} to work", td.Item3.GetType());
+            }
+        }
+
+        [TestMethod]
+        public void TestGet_string()
+        {
+            var testData = new List<Tuple<byte[], int, int, Encoding, string>>()
+            {
+                Tuple.Create(new byte[] { (byte)'A', (byte)'B', (byte)'C' }, 0, 3, Encoding.ASCII, "ABC"),
+                Tuple.Create(new byte[] { (byte)'A', (byte)'B', (byte)'C', 0 }, 0, 4, Encoding.ASCII, "ABC"),
+                Tuple.Create(new byte[] { (byte)'A', (byte)'B', (byte)'C', 0, (byte)'1', (byte)'2', (byte)'3' }, 0, 7, Encoding.ASCII, "ABC"),
+            };
+
+            foreach (var td in testData)
+            {
+                var actual = td.Item1.UUGetString(td.Item2, td.Item3, td.Item4);
+                Assert.AreEqual(td.Item5, actual, "Expect getString to work for encoding {0}", td.Item4);
             }
         }
         
@@ -580,6 +598,28 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item2, td.Item1.UUToHexString(), "Expect ToHexString to work");
+            }
+        }
+
+        #endregion
+
+        #region Index Tests
+
+        [TestMethod]
+        public void TestFirstIndexOf()
+        {
+            //                                    start count search expected
+            var testData = new List<Tuple<byte[], int, int, byte, int>>()
+            {
+                Tuple.Create(new byte[] { 9, 8, 7, 6, 5 }, 0, 5, (byte)8, 1),
+                Tuple.Create(new byte[] { 9, 8, 7, 6, 5 }, 3, 2, (byte)8, -1),
+                Tuple.Create(new byte[] { 9, 8, 7, 6, 5 }, 0, 1, (byte)8, -1),
+                Tuple.Create(new byte[] { 9, 8, 7, 6, 5 }, 1, 5, (byte)8, 1),
+            };
+
+            foreach (var td in testData)
+            {
+                Assert.AreEqual(td.Item5, td.Item1.UUFirstIndexOf(td.Item2, td.Item3, td.Item4), "Expect first index of to work");
             }
         }
 

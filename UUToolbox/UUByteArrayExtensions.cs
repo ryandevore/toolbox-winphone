@@ -132,6 +132,28 @@ namespace UUToolbox
 
             return result;
         }
+
+        public static string UUGetString(this byte[] obj, int index, int size, Encoding encoding)
+        {
+            string result = string.Empty;
+
+            if (obj != null && obj.Length >= (index + size))
+            {
+                int endIndex = index + size;
+                int dataLength = obj.Length;
+                int realSize = 0;
+
+                for (int i = index; i < dataLength && i < endIndex && obj[i] != 0; i++)
+                {
+                    ++realSize;
+                }
+
+                byte[] subData = obj.UUGetBytes(index, realSize);
+                result = new string(encoding.GetChars(subData));
+            }
+
+            return result;
+        }
         
         #endregion
 
@@ -215,6 +237,20 @@ namespace UUToolbox
             }
 
             return sb.ToString();
+        }
+
+        #endregion
+
+        #region Index Methods
+
+        public static int UUFirstIndexOf(this byte[] obj, int startIndex, int searchLimit, byte searchByte)
+        {
+            if ((startIndex + searchLimit) > obj.Length)
+            {
+                searchLimit = obj.Length - startIndex;
+            }
+
+            return Array.IndexOf(obj, searchByte, startIndex, searchLimit);
         }
 
         #endregion
