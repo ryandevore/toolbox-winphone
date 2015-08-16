@@ -581,6 +581,60 @@ namespace UUToolbox.Tests
             }
         }
 
+        [TestMethod]
+        public void TestZeroBytes()
+        {
+            var testData = new List<Tuple<byte[], int, int, byte[]>>()
+            {
+                Tuple.Create<byte[],int,int,byte[]>(null, 0, 0, null),
+                Tuple.Create(new byte[] { 0, 1, 2, 3, 4 }, 0, 0, new byte[] { 0, 1, 2, 3, 4 }),
+                Tuple.Create(new byte[] { 0, 1, 2, 3, 4 }, 4, 0, new byte[] { 0, 1, 2, 3, 4 }),
+                Tuple.Create(new byte[] { 0, 1, 2, 3, 4 }, 4, 8, new byte[] { 0, 1, 2, 3, 0 }),
+                Tuple.Create(new byte[] { 0, 1, 2, 3, 4 }, 0, 10, new byte[] { 0, 0, 0, 0, 0 }),
+                Tuple.Create(new byte[] { 0, 1, 2, 3, 4 }, 0, 5, new byte[] { 0, 0, 0, 0, 0 }),
+                Tuple.Create(new byte[] { 0, 1, 2, 3, 4 }, 2, 2, new byte[] { 0, 1, 0, 0, 4 }),
+
+                Tuple.Create(new byte[] { 0, 1, 2, 3, 4 }, 10, 2, new byte[] { 0, 1, 2, 3, 4 }),
+                
+            };
+
+            foreach (var td in testData)
+            {
+                byte[] obj = td.Item1;
+                obj.UUZeroBytes(td.Item2, td.Item3);
+                CollectionAssert.AreEqual(td.Item4, obj, "Expect UUZeroBytes to work");
+            }
+        }
+
+        [TestMethod]
+        public void TestPutString()
+        {
+            //                            src     put str index, fillSize, encoding, result
+            var testData = new List<Tuple<byte[], string, int, int, Encoding, byte[] >>()
+            {
+                Tuple.Create((byte[])null, "Foobar", 0, 5, Encoding.ASCII, (byte[])null),
+                Tuple.Create(new byte[3], "ABC", 0, 3, Encoding.ASCII, new byte[] { (byte)'A', (byte)'B', (byte)'C', }),
+                Tuple.Create(new byte[3], "ABC", 0, 10, Encoding.ASCII, new byte[] { (byte)'A', (byte)'B', (byte)'C', }), // Fill length beyond end
+                
+                Tuple.Create(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }, "ABC", 2, 3, Encoding.ASCII, 
+                    new byte[] { 0xFF, 0xFF, (byte)'A', (byte)'B', (byte)'C', 0xFF, 0xFF, 0xFF }),
+
+                Tuple.Create(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }, "ABC", 2, 5, Encoding.ASCII,
+                    new byte[] { 0xFF, 0xFF, (byte)'A', (byte)'B', (byte)'C', 0, 0, 0xFF }),
+
+                Tuple.Create(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }, "ABC", 10, 5, Encoding.ASCII,
+                    new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }),
+            };
+            
+            foreach (var td in testData)
+            {
+                byte[] obj = td.Item1;
+
+                obj.UUPutString(td.Item2, td.Item3, td.Item4, td.Item5);
+                CollectionAssert.AreEqual(td.Item6, obj, "Expect Put string to work");
+            }
+        }
+
         #endregion
 
         #region ToString Tests

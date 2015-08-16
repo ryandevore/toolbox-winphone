@@ -220,6 +220,40 @@ namespace UUToolbox
             return obj.UUPutBytes(insert, index);
         }
 
+        public static void UUZeroBytes(this byte[] obj, int index, int length)
+        {
+            if (obj != null && index < obj.Length)
+            {
+                if ((index + length) > obj.Length)
+                {
+                    length = obj.Length - index;
+                }
+
+                Array.Clear(obj, index, length);
+            }
+        }
+
+        public static int UUPutString(this byte[] obj, string data, int index, int fillSize, Encoding encoding)
+        {
+            int filled = 0;
+
+            if (obj != null)
+            {
+                obj.UUZeroBytes(index, fillSize);
+                
+                byte[] dataBytes = encoding.GetBytes(data);
+                
+                if (dataBytes.Length > fillSize)
+                {
+                    dataBytes = dataBytes.UUGetBytes(0, fillSize);
+                }
+
+                filled = obj.UUPutBytes(dataBytes, index);
+            }
+
+            return filled;
+        }
+
         #endregion
 
         #region String Methods
