@@ -358,5 +358,51 @@ namespace UUToolbox
 
             return result;
         }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a bool
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static bool UUSafeGetBool<TKey, TValue>(this IDictionary<TKey, TValue> obj, TKey key, bool defaultValue = false)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is bool)
+                {
+                    result = (bool)val;
+                }
+                else if (val is string)
+                {
+                    string strVal = ((string)val).ToLower();
+                    if ("true" == strVal)
+                    {
+                        result = true;
+                    }
+                    else if ("false" == strVal)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        result = defaultValue;
+                    }
+                }
+                else
+                {
+                    long numVal = obj.UUSafeGetInt64(key, 0);
+                    result = (numVal == 1);
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -266,5 +266,34 @@ namespace UUToolbox.Tests
                 Assert.AreEqual(td.Item3, d.UUSafeGetString(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
+
+        [TestMethod]
+        public void TestGetBool()
+        {
+            var testData = new List<Tuple<string, object, bool, bool>>()
+            {
+                Tuple.Create("BoolTrue", (object)true, true, false),
+                Tuple.Create("BoolFalse", (object)false, false, true),
+                Tuple.Create("Int0", (object)0, false, true),
+                Tuple.Create("Int1", (object)1, true, false),
+                Tuple.Create("IntPos", (object)100, false, true),
+                Tuple.Create("IntNeg", (object)-100, false, true),
+                Tuple.Create("StringTrue", (object)"true", true, false),
+                Tuple.Create("StringFalse", (object)"false", false, true),
+                Tuple.Create("RandomString", (object)"test", true, true),
+                Tuple.Create("RandomString2", (object)"test", false, false),
+            };
+
+            var d = new Dictionary<string, object>();
+            foreach (var td in testData)
+            {
+                d.Add(td.Item1, td.Item2);
+            }
+
+            foreach (var td in testData)
+            {
+                Assert.AreEqual(td.Item3, d.UUSafeGetBool(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+            }
+        }
     }
 }
