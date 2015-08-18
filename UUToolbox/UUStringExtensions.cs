@@ -251,9 +251,13 @@ namespace UUToolbox
         /// <param name="formatProvider">The format provider.</param>
         /// <param name="dateTimeStyles">DateTime style options.</param>
         /// <returns>Parsed value or default if parsing fails</returns>
-        public static DateTime? UUToDateTime(this string obj, string[] formats = null, DateTime? defaultValue = null, IFormatProvider formatProvider = null, DateTimeStyles dateTimeStyles = DateTimeStyles.None)
+        public static DateTime UUToDateTime(this string obj, string[] formats = null, DateTime? defaultValue = null, IFormatProvider formatProvider = null, DateTimeStyles dateTimeStyles = DateTimeStyles.None)
         {
-            DateTime? dt = defaultValue;
+            DateTime dt = DateTime.MinValue;
+            if (defaultValue.HasValue)
+            {
+                dt = defaultValue.Value;
+            }
 
             if (!string.IsNullOrEmpty(obj))
             {

@@ -353,33 +353,33 @@ namespace UUToolbox.Tests
         [TestMethod]
         public void TestToDateTime()
         {
-            var testData = new List<Tuple<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>>()
+            var testData = new List<Tuple<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>>()
             {
                 // Failure cases
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
-                    "FooBar", null, null, null, DateTimeStyles.None, null),
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
-                    "FooBar", new string[] {  "yyyy-MM-dd hh:mm:sstt" }, null, null, DateTimeStyles.None, null),
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
+                    "FooBar", null, null, null, DateTimeStyles.None, DateTime.MinValue),
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
+                    "FooBar", new string[] {  "yyyy-MM-dd hh:mm:sstt" }, null, null, DateTimeStyles.None, DateTime.MinValue),
                 
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
                     "2015-08-18 02:18:22PM", new string[] { "MM/dd/yyyy hh:mm:sstt" }, null, null, DateTimeStyles.None,
-                    null),
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    DateTime.MinValue),
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
                     "2015-08-18 02:18:22AM", new string[] { "MM/dd/yyyy hh:mm:sstt" }, null, null, DateTimeStyles.None,
-                    null),
+                    DateTime.MinValue),
 
                 // Success cases
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
                     "2015-08-18 02:18:22PM", new string[] { "yyyy-MM-dd hh:mm:sstt" }, null, null, DateTimeStyles.None, 
                     new DateTime(2015, 8, 18, 2+12, 18, 22, 00, DateTimeKind.Unspecified)),
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
                     "2015-08-18 02:18:22AM", new string[] { "yyyy-MM-dd hh:mm:sstt" }, null, null, DateTimeStyles.None,
                     new DateTime(2015, 8, 18, 2, 18, 22, 00, DateTimeKind.Unspecified)),
 
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
                     "2015-08-18 02:18:22PM", null, null, null, DateTimeStyles.None,
                     new DateTime(2015, 8, 18, 2+12, 18, 22, 00, DateTimeKind.Unspecified)),
-                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime>(
                     "2015-08-18 02:18:22AM", null, null, null, DateTimeStyles.None,
                     new DateTime(2015, 8, 18, 2, 18, 22, 00, DateTimeKind.Unspecified)),
 
