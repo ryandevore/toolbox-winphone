@@ -247,20 +247,31 @@ namespace UUToolbox
         /// Safely converts a string to a DateTime
         /// </summary>
         /// <param name="obj">The string to convert.</param>
-        /// <param name="format">The date format string.</param>
+        /// <param name="formats">Array of date format strings. If non null TryParseExact is used. If null, TryParse is used.</param>
         /// <param name="formatProvider">The format provider.</param>
         /// <param name="dateTimeStyles">DateTime style options.</param>
         /// <returns>Parsed value or default if parsing fails</returns>
-        public static DateTime? UUToDateTime(this string obj, string format, DateTime? defaultValue = null, IFormatProvider formatProvider = null, DateTimeStyles dateTimeStyles = DateTimeStyles.None)
+        public static DateTime? UUToDateTime(this string obj, string[] formats, DateTime? defaultValue = null, IFormatProvider formatProvider = null, DateTimeStyles dateTimeStyles = DateTimeStyles.None)
         {
             DateTime? dt = defaultValue;
 
             if (!string.IsNullOrEmpty(obj))
             {
                 DateTime outDate;
-                if (DateTime.TryParseExact(obj, format, formatProvider, dateTimeStyles, out outDate))
+
+                if (formats != null && formats.Length > 0)
                 {
-                    dt = outDate;
+                    if (DateTime.TryParseExact(obj, formats, formatProvider, dateTimeStyles, out outDate))
+                    {
+                        dt = outDate;
+                    }
+                }
+                else
+                {
+                    if (DateTime.TryParse(obj, formatProvider, dateTimeStyles, out outDate))
+                    {
+                        dt = outDate;
+                    }
                 }
             }
 

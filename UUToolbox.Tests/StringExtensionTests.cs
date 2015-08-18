@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace UUToolbox.Tests
 {
@@ -346,6 +347,49 @@ namespace UUToolbox.Tests
             {
                 var actual = td.Item1.UUToInt64(td.Item2);
                 Assert.AreEqual(td.Item3, actual, "Expect To_{0} to work for input {1}", td.Item2.GetType(), td.Item1);
+            }
+        }
+
+        [TestMethod]
+        public void TestToDateTime()
+        {
+            var testData = new List<Tuple<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>>()
+            {
+                // Failure cases
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "FooBar", null, null, null, DateTimeStyles.None, null),
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "FooBar", new string[] {  "yyyy-MM-dd hh:mm:sstt" }, null, null, DateTimeStyles.None, null),
+                
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "2015-08-18 02:18:22PM", new string[] { "MM/dd/yyyy hh:mm:sstt" }, null, null, DateTimeStyles.None,
+                    null),
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "2015-08-18 02:18:22AM", new string[] { "MM/dd/yyyy hh:mm:sstt" }, null, null, DateTimeStyles.None,
+                    null),
+
+                // Success cases
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "2015-08-18 02:18:22PM", new string[] { "yyyy-MM-dd hh:mm:sstt" }, null, null, DateTimeStyles.None, 
+                    new DateTime(2015, 8, 18, 2+12, 18, 22, 00, DateTimeKind.Unspecified)),
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "2015-08-18 02:18:22AM", new string[] { "yyyy-MM-dd hh:mm:sstt" }, null, null, DateTimeStyles.None,
+                    new DateTime(2015, 8, 18, 2, 18, 22, 00, DateTimeKind.Unspecified)),
+
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "2015-08-18 02:18:22PM", null, null, null, DateTimeStyles.None,
+                    new DateTime(2015, 8, 18, 2+12, 18, 22, 00, DateTimeKind.Unspecified)),
+                Tuple.Create<string, string[], DateTime?, IFormatProvider, DateTimeStyles, DateTime?>(
+                    "2015-08-18 02:18:22AM", null, null, null, DateTimeStyles.None,
+                    new DateTime(2015, 8, 18, 2, 18, 22, 00, DateTimeKind.Unspecified)),
+
+
+            };
+
+            foreach (var td in testData)
+            {
+                var actual = td.Item1.UUToDateTime(td.Item2, td.Item3, td.Item4, td.Item5);
+                Assert.AreEqual(td.Item6, actual, "Expect ToDateTime to work for inpu");
             }
         }
 
