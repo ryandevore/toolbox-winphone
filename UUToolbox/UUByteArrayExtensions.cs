@@ -248,7 +248,8 @@ namespace UUToolbox
                     dataBytes = dataBytes.UUGetBytes(0, fillSize);
                 }
 
-                filled = obj.UUPutBytes(dataBytes, index);
+                obj.UUPutBytes(dataBytes, index);
+                filled = fillSize;
             }
 
             return filled;
