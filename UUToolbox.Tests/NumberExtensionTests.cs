@@ -1,8 +1,6 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using UUToolbox;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace UUToolbox.Tests
 {
