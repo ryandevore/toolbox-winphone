@@ -405,4 +405,402 @@ namespace UUToolbox
             return result;
         }
     }
+
+
+    /// <summary>
+    /// Extension methods for IReadOnlyDictionary 
+    /// </summary>
+    public static class UUReadOnlyDictionaryExtensions
+    {
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a UInt8
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static byte UUSafeGetReadOnlyUInt8<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, byte defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is byte)
+                {
+                    result = (byte)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToUInt8(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToByte(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a UInt16
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static ushort UUSafeGetReadOnlyUInt16<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, ushort defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is ushort)
+                {
+                    result = (ushort)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToUInt16(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToUInt16(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a UInt32
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static uint UUSafeGetReadOnlyUInt32<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, uint defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is uint)
+                {
+                    result = (uint)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToUInt32(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToUInt32(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a UInt64
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static ulong UUSafeGetReadOnlyUInt64<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, ulong defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is ulong)
+                {
+                    result = (ulong)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToUInt64(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToUInt64(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a Int8
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static sbyte UUSafeGetReadOnlyInt8<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, sbyte defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is sbyte)
+                {
+                    result = (sbyte)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToInt8(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToSByte(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a Int16
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static short UUSafeGetReadOnlyInt16<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, short defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is short)
+                {
+                    result = (short)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToInt16(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToInt16(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a Int32
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static int UUSafeGetReadOnlyInt32<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, int defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is int)
+                {
+                    result = (int)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToInt32(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToInt32(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a Int64
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static long UUSafeGetReadOnlyInt64<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, long defaultValue = 0)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is long)
+                {
+                    result = (long)val;
+                }
+                else if (val is string)
+                {
+                    result = ((string)val).UUToInt64(defaultValue);
+                }
+                else
+                {
+                    try
+                    {
+                        result = Convert.ToInt64(val);
+                    }
+                    catch
+                    {
+                        result = defaultValue;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a string
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static string UUSafeGetReadOnlyString<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, string defaultValue = "")
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is string)
+                {
+                    result = (string)val;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Safely gets a dictionary value and converts to a bool
+        /// </summary>
+        /// <typeparam name="TKey">Dictionary Key type</typeparam>
+        /// <typeparam name="TValue">Dictionary Value type</typeparam>
+        /// <param name="obj">Dictionary to query</param>
+        /// <param name="key">Lookup key</param>
+        /// <param name="defaultValue">Default value returned of object cannot be converted to the proper type</param>
+        /// <returns>Converted value or default</returns>
+        public static bool UUSafeGetReadOnlyBool<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> obj, TKey key, bool defaultValue = false)
+        {
+            var result = defaultValue;
+
+            if (obj != null && obj.ContainsKey(key))
+            {
+                object val = obj[key];
+                if (val is bool)
+                {
+                    result = (bool)val;
+                }
+                else if (val is string)
+                {
+                    string strVal = ((string)val).ToLower();
+                    if ("true" == strVal)
+                    {
+                        result = true;
+                    }
+                    else if ("false" == strVal)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        result = defaultValue;
+                    }
+                }
+                else
+                {
+                    long numVal = obj.UUSafeGetReadOnlyInt64(key, 0);
+                    result = (numVal == 1);
+                }
+            }
+
+            return result;
+        }
+    }
 }

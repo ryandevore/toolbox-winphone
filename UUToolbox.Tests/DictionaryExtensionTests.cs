@@ -34,6 +34,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetUInt8(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string,object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyUInt8(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -64,6 +68,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetUInt16(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyUInt16(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -94,6 +102,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetUInt32(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyUInt32(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -123,6 +135,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetUInt64(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyUInt64(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -153,6 +169,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetInt8(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyInt8(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -183,6 +203,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetInt16(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyInt16(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -213,6 +237,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetInt32(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyInt32(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -243,6 +271,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetInt64(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyInt64(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -264,6 +296,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetString(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyString(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
 
@@ -293,6 +329,10 @@ namespace UUToolbox.Tests
             foreach (var td in testData)
             {
                 Assert.AreEqual(td.Item3, d.UUSafeGetBool(td.Item1, td.Item4), "Expect SafeGet_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
+
+                var ro = d as IReadOnlyDictionary<string, object>;
+                Assert.IsNotNull(ro, "Expect cast to read only dictionary to work");
+                Assert.AreEqual(td.Item3, ro.UUSafeGetReadOnlyBool(td.Item1, td.Item4), "Expect SafeGetReadOnly_{0} to work for key {1}", td.Item3.GetType(), td.Item1);
             }
         }
     }
