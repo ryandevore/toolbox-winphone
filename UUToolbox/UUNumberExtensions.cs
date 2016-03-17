@@ -113,6 +113,50 @@ namespace UUToolbox
             return BitConverter.ToUInt16(buffer, 0).UUSwapByteOrder();
         }
 
+        #endregion
+
+        #region Bit Checking
+
+        public static bool UUIsFlagSet(this byte obj, byte flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
+        public static bool UUIsFlagSet(this ushort obj, ushort flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
+        public static bool UUIsFlagSet(this uint obj, uint flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
+        public static bool UUIsFlagSet(this ulong obj, ulong flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
+        public static bool UUIsFlagSet(this sbyte obj, sbyte flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
+        public static bool UUIsFlagSet(this short obj, short flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
+        public static bool UUIsFlagSet(this int obj, int flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
+        public static bool UUIsFlagSet(this long obj, long flag)
+        {
+            return ((obj & flag) == flag);
+        }
+
         #endregion 
     }
 }
